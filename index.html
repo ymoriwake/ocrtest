@@ -13,7 +13,7 @@
         (function() {
             Tesseract
                 .recognize("a.jpg", {
-                    lang: 'jpn'
+                    lang: 'en'
                 })
                 .progress(function(p) {
                     $("#msg").text('準備中🐹 <' + p.status + ": " + (100 * p.progress).toFixed(1) + '%>')
