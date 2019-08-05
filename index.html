@@ -16,7 +16,7 @@
                     lang: 'jpn'
                 })
                 .progress(function(p) {
-                    $("#msg").text('準備中 <' + p.status + ": " + (100 * p.progress).toFixed(1) + '%>')
+                    $("#msg").text('準備中 <' + p.status + ": " + (60 * p.progress).toFixed(1) + '%>')
                 })
                 .then(function(result) {
                     $("#msg").text('準備完了')
@@ -28,13 +28,14 @@
 <body>
     <div align="center">
         <video id="player" controls autoplay playsinline></video>
-        <canvas id="canvas" width="300" height="100"></canvas>
+        <canvas id="canvas" width="400" height="60"></canvas>
         <div class="button">
             <button id="captureeng">Capture English</button>
         </div>
         <div id="msg" align="center"></div>
-        <canvas id="snapshot" width="300" height="100"></canvas>
+        <canvas id="snapshot" width="400" height="60"></canvas>
         <br>
+        <p><input type="text" align="center" name="text"></p>
         <script>
             var video = document.getElementById("player"),
                 canvas = document.getElementById("canvas"),
@@ -42,10 +43,10 @@
             requestAnimationFrame(draw);
     
             function draw() {
-                canvas.width = 300;
-                canvas.height = 100;
-                ctx.drawImage(video, 100, 300, 600, 200,
-                    0, 0, 300, 100);
+                canvas.width = 400;
+                canvas.height = 60;
+                ctx.drawImage(video, 60, 400, 600, 200,
+                    0, 0, 400, 60);
                 requestAnimationFrame(draw);
             }
             var snapshotCanvas = document.getElementById('snapshot');
@@ -58,7 +59,7 @@
    
             captureButtoneng.addEventListener('click', function() {
                 var context = snapshot.getContext('2d');
-                context.drawImage(video, 100, 300, 600, 200, 0, 0, snapshotCanvas.width,
+                context.drawImage(video, 60, 400, 600, 200, 0, 0, snapshotCanvas.width,
                     snapshotCanvas.height);
                 const url = snapshot.toDataURL("image/png");
                 Tesseract
@@ -72,7 +73,7 @@
                         console.log(result)
                         $("#msg").text("Progress Complete")
                         var elem = document.createElement('div');
-                        elem.innerHTML = "<div id=" + num + " style='width:300px; background-color:#EEEEEE'><img src=" + url + " /></div><br>"
+                        elem.innerHTML = "<div id=" + num + " style='width:400px; background-color:#EEEEEE'><img src=" + url + " /></div><br>"
                         var parent = document.getElementById("results");
                         parent.insertBefore(elem, parent.firstChild);
                         var numdiv = document.getElementById(num);
@@ -80,6 +81,7 @@
                         msg.innerHTML = result.text;
                         numdiv.appendChild(msg);
                         num += 1;
+                        $("#msg").text(result.text)
                     });
             });
             var front = false;
