@@ -9,20 +9,6 @@
     <link rel="stylesheet" href="index.css" />
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://cdn.rawgit.com/naptha/tesseract.js/1.0.7/dist/tesseract.js"></script>
-    <script>
-        (function() {
-            Tesseract
-                .recognize("u.jpg", {
-                    lang: 'jpn'
-                })
-                .progress(function(p) {
-                    $("#msg").text('準備中 <' + p.status + ": " + (60 * p.progress).toFixed(1) + '%>')
-                })
-                .then(function(result) {
-                    $("#msg").text('準備完了')
-                });
-        }());
-    </script>
 </head>
 
 <body>
@@ -35,7 +21,7 @@
         <div id="msg" align="center"></div>
         <canvas id="snapshot" width="400" height="60"></canvas>
         <br>
-        <p><input type="text" align="center" name="resultText"></p>
+        <p><input type="text" id="resultText" align="center"></p>
         <script>
             var video = document.getElementById("player"),
                 canvas = document.getElementById("canvas"),
