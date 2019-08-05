@@ -12,11 +12,11 @@
     <script>
         (function() {
             Tesseract
-                .recognize("a.jpg", {
-                    lang: 'en'
+                .recognize("u.jpg", {
+                    lang: 'jpn'
                 })
                 .progress(function(p) {
-                    $("#msg").text('準備中...')
+                    $("#msg").text('準備中 <' + p.status + ": " + (100 * p.progress).toFixed(1) + '%>')
                 })
                 .then(function(result) {
                     $("#msg").text('準備完了')
@@ -33,7 +33,7 @@
             <button id="capture">日本語を撮影する</button>
         </div>
         <div class="button">
-            <button id="captureeng">レシートを撮影する♪</button>
+            <button id="captureeng">Capture English</button>
         </div>
         <div id="msg" align="center"></div>
         <canvas id="snapshot" width="300" height="100"></canvas>
@@ -62,13 +62,14 @@
                 requestAnimationFrame(draw);
             }
             var snapshotCanvas = document.getElementById('snapshot');
+            var captureButton = document.getElementById('capture');
             var captureButtoneng = document.getElementById('captureeng');
             var snapshotButton = document.getElementById('snapshotbutton');
             var handleSuccess = function(stream) {
                 video.srcObject = stream;
             };
             var num = 1;
-            
+    
             captureButton.addEventListener('click', function() {
                 var context = snapshot.getContext('2d');
                 context.drawImage(video, 100, 300, 600, 200, 0, 0, snapshotCanvas.width,
@@ -95,7 +96,6 @@
                         num += 1;
                     });
             });
-            
             captureButtoneng.addEventListener('click', function() {
                 var context = snapshot.getContext('2d');
                 context.drawImage(video, 100, 300, 600, 200, 0, 0, snapshotCanvas.width,
