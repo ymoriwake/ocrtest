@@ -14,12 +14,12 @@
 <body>
     <div align="center">
         <video id="player" controls autoplay playsinline></video>
-        <canvas id="canvas" width="350" height="70"></canvas>
+        <canvas id="canvas" width="80%" height="70"></canvas>
         <div class="button">
             <button id="captureeng">番号を撮影してね♪</button>
         </div>
         <div id="msg" align="center"></div>
-        <canvas id="snapshot" width="350" height="70"></canvas>
+        <canvas id="snapshot" width="80%" height="70"></canvas>
         <br>
         <p><input type="text" id="resultText" align="center"></p>
         <script>
@@ -29,10 +29,10 @@
             requestAnimationFrame(draw);
     
             function draw() {
-                canvas.width = 350;
+                canvas.width = 80%;
                 canvas.height = 70;
-                ctx.drawImage(video, 70, 350, 700, 200,
-                    0, 0, 350, 70);
+                ctx.drawImage(video, 70, 80%, 700, 200,
+                    0, 0, 80%, 70);
                 requestAnimationFrame(draw);
             }
             var snapshotCanvas = document.getElementById('snapshot');
@@ -45,7 +45,7 @@
    
             captureButtoneng.addEventListener('click', function() {
                 var context = snapshot.getContext('2d');
-                context.drawImage(video, 70, 350, 700, 200, 0, 0, snapshotCanvas.width,
+                context.drawImage(video, 70, 80%, 700, 200, 0, 0, snapshotCanvas.width,
                     snapshotCanvas.height);
                 const url = snapshot.toDataURL("image/png");
                 Tesseract
@@ -59,14 +59,7 @@
                         console.log(result)
                         $("#msg").text("解析完了")
                         var elem = document.createElement('div');
-                        elem.innerHTML = "<div id=" + num + " style='width:350px; background-color:#EEEEEE'><img src=" + url + " /></div><br>"
-//                         var parent = document.getElementById("results");
-//                         parent.insertBefore(elem, parent.firstChild);
-//                         var numdiv = document.getElementById(num);
-//                         var msg = document.createElement('div');
-//                         msg.innerHTML = result.text;
-//                         numdiv.appendChild(msg);
-//                         num += 1;
+                        elem.innerHTML = "<div id=" + num + " style='width:80%px; background-color:#EEEEEE'><img src=" + url + " /></div><br>"
                         $("#resultText").val(result.text);
                     });
             });
