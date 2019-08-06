@@ -72,7 +72,10 @@
                      facingMode: (front ? "user" : "environment")
                  }
            };
-            navigator.mediaDevices.getUserMedia(constraints).then(handleSuccess);
+            navigator.mediaDevices.getUserMedia(constraints).then(handleSuccess).catch(function(err) {
+    			// カメラを許可してください。
+    			window.alert("カメラの使用が許可されませんでした");
+    		});
         </script>
     </div>
 </body>
