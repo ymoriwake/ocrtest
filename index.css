@@ -1,9 +1,9 @@
 body {
-  margin: 0;
+  margin: 10px 0px 10px 0px;
   background: #FFF;
 }
 #player {
-  width: 0.1%;
+  width: 0.5%;
   height: 0%;
 }
 #captureeng{
