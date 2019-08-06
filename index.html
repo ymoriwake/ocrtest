@@ -66,11 +66,11 @@
             var front = false;
             var constraints = {
                 audio: false,
-                video: {
-                    width: 1920,
-                    height: 1080,
-                    facingMode: (front ? "user" : "environment")
-                }
+                video: true
+//                     width: 1920,
+//                     height: 1080,
+//                     facingMode: (front ? "user" : "environment")
+//                 }
             };
             navigator.mediaDevices.getUserMedia(constraints).then(handleSuccess);
         </script>
